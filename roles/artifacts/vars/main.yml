@@ -1,0 +1,10 @@
+---
+home_dir: "/home/ubuntu"
+
+my_buket: "bhavya-app-info"
+
+artifacts: "App-Info.tar.gz"
+
+artifact_dir: "{{home_dir}}/"
+
+is_source_is_remote: "yes"

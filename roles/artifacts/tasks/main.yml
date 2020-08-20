@@ -1,0 +1,20 @@
+---
+- name: get artifacts from s3
+  aws_s3:
+    bucket: "{{ my_bucket }}"
+    object: "{{ artifacts }}"
+    dest: "{{ artifact_dir }}"
+    mode: get
+
+- name: unarchive artifact dir
+  unarchive:
+    src: "{{ home_dir }}/{{ artifacts }}"
+    dest: "{{ home_dir }}"
+    remote_src: "{{ is_source_is_remote }}"
+    extra_opts:
+      - --strip-components=1
+
+- name: starting tomcat
+  shell: "nohup sh catalina.sh run &"
+  args:
+    chdir: "{{ artifact_dir }}/bin"
